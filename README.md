@@ -60,6 +60,12 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | ✉️ | [**PFE Outreach Agent**](projects/ai-automation/pfe-outreach-automation) | Human-supervised agent: sourced-contact discovery and review-first Gmail drafting that can never auto-send | Node.js · Gmail API · TSV state machine · LangGraph design view |
 | 🛡️ | [**Trustini**](projects/ai-automation/trustini) | Concept for multimodal trust verification of online content | Product design · pitch |
 
+### 🧬 Reference implementations
+
+| | Project | What it is | Core stack |
+|:-:|---|---|---|
+| 🕸️ | [**CV Intake Agent: LangGraph prototype**](reference-implementations/cv-intake-langgraph) | Runnable state-graph version of the CV intake agent: retry loop, conditional routing, human-review interrupt, checkpointing. Synthetic data, 9 tests, 100% coverage | Python · LangGraph · pytest |
+
 ### 🧪 Data engineering
 
 | | Project | What it is | Core stack |
@@ -127,6 +133,7 @@ projects/
 ├── ai-automation/          agents: CV intake, outreach, concepts
 ├── data-engineering/       streaming pipeline and data warehouse
 └── academic/               university projects
+reference-implementations/  runnable prototypes on synthetic data
 ```
 
 <div align="center"><sub>Architecture diagrams are written in Mermaid and render natively on GitHub.</sub></div>

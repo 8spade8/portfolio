@@ -58,7 +58,7 @@ flowchart LR
 
 ## LangGraph view of this agent
 
-The production runtime is Node.js, but the control flow is a graph, and this is how it maps onto **LangGraph** concepts. It is a design reference, not the code that runs.
+The production runtime is Node.js, but the control flow is a graph, and this is how it maps onto **LangGraph** concepts. A **runnable LangGraph prototype of this graph, with synthetic data and tests**, is in [`reference-implementations/cv-intake-langgraph`](../../../reference-implementations/cv-intake-langgraph). The prototype is not the code that runs in production.
 
 | LangGraph concept | In this agent |
 |---|---|

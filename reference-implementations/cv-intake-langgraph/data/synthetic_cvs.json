@@ -1,0 +1,14 @@
+[
+  {"message_id": "msg-001", "filename": "Ada_Example.pdf",
+   "text": "Name: Ada Example\nEmail: ada@example.com\nSkills: python, django, sql"},
+  {"message_id": "msg-002", "filename": "Bo_Sample.pdf",
+   "text": "Name: Bo Sample\nEmail: bo@example.com\nSkills: seo, content, branding\n[FLAKY]"},
+  {"message_id": "msg-003", "filename": "Cy_Broken.pdf",
+   "text": "Name: Cy Broken\nEmail: cy@example.com\nSkills: python\n[CORRUPT]"},
+  {"message_id": "msg-004", "filename": "Di_Vague.pdf",
+   "text": "Name: Di Vague\nEmail: di@example.com\nSkills: communication, teamwork"},
+  {"message_id": "msg-001", "filename": "Ada_Example_again.pdf",
+   "text": "Name: Ada Example\nEmail: ada@example.com\nSkills: python, django, sql"},
+  {"message_id": "msg-005", "filename": "Ada_Example_v2.pdf",
+   "text": "Name: Ada Example\nEmail: ADA@example.com\nSkills: python, django, sql, javascript"}
+]
