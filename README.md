@@ -4,6 +4,10 @@
 
 <br/>
 
+![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=for-the-badge)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![n8n](https://img.shields.io/badge/n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq_LLM-F55036?style=for-the-badge)
 ![Apps Script](https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
@@ -41,18 +45,18 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | | Project | What it is | Core stack |
 |:-:|---|---|---|
 | 📊 | [**LC Performance Dashboard**](projects/aiesec/lc-performance-dashboard) | Self-refreshing performance dashboard with a staged, resumable sync from two APIs and national benchmarking | Apps Script · GraphQL · REST · Sheets API |
-| 🧰 | [**ICX Tools Suite**](projects/aiesec/icx-tools-suite) | 13 internal tools on one shared core and a nine-rule engineering standard | Apps Script · GraphQL · Node.js · clasp |
-| 🧲 | [**IGT Offline Candidate Matching**](projects/aiesec/igt-offline-candidate-matching) | Governed candidate sheet fed by a signed webhook from a CV-parsing pipeline | Apps Script · Web App · HMAC |
+| 🧰 | [**ICX Tools Suite**](projects/aiesec/icx-tools-suite) | 13 internal tools on one shared core and a nine-rule engineering standard | n8n → Apps Script · GraphQL · Node.js · clasp |
+| 🧲 | [**IGT Offline Candidate Matching**](projects/aiesec/igt-offline-candidate-matching) | Governed candidate sheet fed by a signed webhook from a CV-parsing pipeline | n8n → Apps Script · Web App · HMAC |
 | 🛍️ | [**Merch Reservation Shop**](projects/aiesec/merch-reservation-shop) | Zero-payment reservation shop with a separate admin portal and oversell-proof stock | React · Vite · Tailwind · Supabase |
 | 🎯 | [**Talent Recruitment Platform**](projects/aiesec/talent-recruitment-platform) | End-to-end recruitment flow: sign-up, application, interview booking, decisions | Next.js · Supabase · RLS · Gmail SMTP |
-| 🧠 | [**N-Dash: Executive Operations Agent**](projects/consulting/n-dash) | Multi-agent system over Gmail, Calendar and project files: LLM triage, risk assessment, daily digests and a web dashboard | Apps Script · Groq (strict JSON schemas, golden-set evals) · Vercel · GitHub Actions |
+| 🧠 | [**N-Dash: Executive Operations Agent**](projects/consulting/n-dash) | Multi-agent system over Gmail, Calendar and project files: LLM triage, risk assessment, daily digests and a web dashboard | n8n → Apps Script · Groq (strict JSON schemas, golden-set evals) · Vercel · GitHub Actions |
 | 🔁 | [**Dolibarr → Swiver Migration**](projects/finance/dolibarr-to-swiver) | Two-phase, audited ERP-to-invoicing migration over a REST API, with a reverse-engineered API guide | Python · REST |
 
 ### 🤖 AI & automation
 
 | | Project | What it is | Core stack |
 |:-:|---|---|---|
-| 📥 | [**CV Intake Agent**](projects/ai-automation/cv-intake-agent) | Always-on agent: WhatsApp CVs → parse → LLM opportunity matching → validated, deduplicated sheet records, with retries, replay and a live dashboard | Node.js · whatsapp-web.js · OpenRouter LLM · Drive/Sheets APIs · SQLite · PM2 |
+| 📥 | [**CV Intake Agent**](projects/ai-automation/cv-intake-agent) | Always-on agent: WhatsApp CVs → parse → LLM opportunity matching → validated, deduplicated sheet records, with retries, replay and a live dashboard | n8n → Node.js · whatsapp-web.js · OpenRouter LLM · Drive/Sheets APIs · SQLite · PM2 |
 | ✉️ | [**PFE Outreach Agent**](projects/ai-automation/pfe-outreach-automation) | Human-supervised agent: sourced-contact discovery and review-first Gmail drafting that can never auto-send | Node.js · Gmail API · TSV state machine |
 | 🛡️ | [**Trustini**](projects/ai-automation/trustini) | Concept for multimodal trust verification of online content | Product design · pitch |
 
@@ -80,10 +84,10 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | **Languages** | JavaScript (ES2020+), TypeScript, Python, Java, SQL, HiveQL |
 | **Front end** | React 18/19, Next.js App Router, Vite, Tailwind CSS, D3.js |
 | **Back end & data stores** | Supabase (Postgres, Auth, Realtime, RLS), MySQL, SQL Server, Google Sheets as an operational store, Vercel serverless |
-| **Automation** | Google Apps Script (V8), `clasp`, time-driven triggers, `LockService`, webhooks, n8n (earlier versions of several tools) |
+| **Automation** | **n8n** (first versions of N-Dash, the ICX tools and the CV pipeline), Google Apps Script (V8), `clasp`, time-driven triggers, `LockService`, webhooks |
 | **APIs** | GraphQL, REST, Gmail / Calendar / Drive / Sheets APIs, OAuth 2 |
 | **Data engineering** | Kafka, Spark Structured Streaming, HDFS, Hive, SSIS (star schemas) |
-| **AI and agents** | LangChain and LangGraph (Python, internship work on multi-agent pipelines and routing agents), tool-using and multi-agent design, LLM extraction, matching and classification (Groq, OpenRouter), strict-schema outputs and golden-set evals, human-in-the-loop checkpoints, deterministic fallbacks, prompt and guardrail design |
+| **AI and agents** | **LangChain**, **LangGraph** (Python, internship work on multi-agent pipelines and routing agents), **n8n** (agent workflows, later migrated to code), tool-using and multi-agent design, LLM extraction, matching and classification (Groq, OpenRouter), strict-schema outputs and golden-set evals, human-in-the-loop checkpoints, deterministic fallbacks, prompt and guardrail design |
 | **DevOps & quality** | Docker Compose, GitHub Actions, Vercel, Node test runners, idempotent migrations |
 
 ---

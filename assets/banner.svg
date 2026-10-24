@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="t d">
-  <title id="t">Mohamed Kallel: Data, Automation and Full-Stack Engineering</title>
+  <title id="t">Mohamed Kallel: AI Agents, Data, Automation and Full-Stack Engineering</title>
   <desc id="d">Portfolio banner</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -45,7 +45,8 @@
     <text x="64" y="112" fill="#a5b4fc" font-size="16" letter-spacing="4">PORTFOLIO</text>
     <text x="64" y="176" fill="#ffffff" font-size="60" font-weight="800">Mohamed Kallel</text>
     <rect x="66" y="198" width="120" height="5" rx="2.5" fill="url(#accent)"/>
-    <text x="64" y="242" fill="#e2e8f0" font-size="24" font-weight="500">Data pipelines · Automation · Full-stack</text>
-    <text x="64" y="276" fill="#94a3b8" font-size="16">Real systems for real teams, documented by architecture.</text>
+    <text x="64" y="242" fill="#e2e8f0" font-size="24" font-weight="500">AI agents · Data pipelines · Automation · Full-stack</text>
+    <text x="64" y="272" fill="#94a3b8" font-size="16">Real systems for real teams, documented by architecture.</text>
+    <text x="64" y="300" fill="#a5b4fc" font-size="14" letter-spacing="1">LangGraph · LangChain · n8n · Apps Script · Kafka · Spark</text>
   </g>
 </svg>
