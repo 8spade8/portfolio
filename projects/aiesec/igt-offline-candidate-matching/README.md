@@ -24,6 +24,12 @@ Candidates sourced outside the main platform had no home. Their details lived in
 
 One governed sheet with a fixed schema, ownership and status tracking, **plus** an authenticated HTTP endpoint so the pipeline can insert and update candidates without a human copying anything.
 
+## Where it sits: the agent's tool boundary
+
+This is the **action layer** of a CV-intake agent (see [CV Intake Agent](../../ai-automation/cv-intake-agent)). The agent perceives CVs sent over chat, parses them and uses an LLM to match each candidate to an opportunity; this sheet and its webhook are the one *tool* it writes through (the service can also write directly through the Sheets API, with the webhook kept as an alternative mode). Keeping that boundary signed, validated and idempotent is what makes an LLM-driven writer safe to attach to a shared sheet.
+
+**Technology lineage.** The sheet's ingestion started as an **n8n** workflow and was re-implemented as **Google Apps Script** (HtmlService sidebar, web-app webhook, `LockService`), removing the external orchestrator from the critical path. The source stays private because it encodes the candidate schema, process rules and personal data.
+
 ## Architecture
 
 ```mermaid

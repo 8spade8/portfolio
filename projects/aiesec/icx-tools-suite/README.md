@@ -20,6 +20,10 @@
 
 Over time each tool had grown on its own: one tool was a single ~200 KB file, each had different menus, "clear and rewrite" syncs that fought with people editing the sheet, and no consistent way to know whether a sync had worked. Non-technical users could not trust or navigate them.
 
+## Technology lineage
+
+The tools began as **n8n** workflows and were re-implemented as **Google Apps Script** on a shared core, so the team no longer depends on an external orchestrator. Most of the suite is deterministic sync and reporting; its agent-like pieces are the scheduled, self-auditing sync loops (watermark sync, trigger audit, confidence-scored directory matching that leaves unmatched rows blank rather than guessing) and the CV intake service, documented as the [CV Intake Agent](../../ai-automation/cv-intake-agent). The source stays private because it encodes operational data, internal rules and personal data.
+
 ## The reform
 
 I defined an **engineering standard (R1–R9)** and rebuilt the tools on a **shared core**, so every tool behaves the same way and a fix lands everywhere.

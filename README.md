@@ -15,7 +15,7 @@
 ![Spark](https://img.shields.io/badge/Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-**Engineering student building production data pipelines, internal tools and web apps.**
+**Engineering student building production data pipelines, AI agents, internal tools and web apps.**
 This repository is an architecture-first tour of that work.
 
 [Projects](#-projects) · [Stack](#-stack) · [How I build](#-how-i-build) · [About this repo](#-about-this-repository)
@@ -45,14 +45,15 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | 🧲 | [**IGT Offline Candidate Matching**](projects/aiesec/igt-offline-candidate-matching) | Governed candidate sheet fed by a signed webhook from a CV-parsing pipeline | Apps Script · Web App · HMAC |
 | 🛍️ | [**Merch Reservation Shop**](projects/aiesec/merch-reservation-shop) | Zero-payment reservation shop with a separate admin portal and oversell-proof stock | React · Vite · Tailwind · Supabase |
 | 🎯 | [**Talent Recruitment Platform**](projects/aiesec/talent-recruitment-platform) | End-to-end recruitment flow: sign-up, application, interview booking, decisions | Next.js · Supabase · RLS · Gmail SMTP |
-| 🧠 | [**N-Dash: Executive Operations Dashboard**](projects/consulting/n-dash) | Gmail + Calendar + project-file intelligence with LLM triage, daily digests and a web dashboard | Apps Script · Groq LLM · Vercel · GitHub Actions |
+| 🧠 | [**N-Dash: Executive Operations Agent**](projects/consulting/n-dash) | Multi-agent system over Gmail, Calendar and project files: LLM triage, risk assessment, daily digests and a web dashboard | Apps Script · Groq (strict JSON schemas, golden-set evals) · Vercel · GitHub Actions |
 | 🔁 | [**Dolibarr → Swiver Migration**](projects/finance/dolibarr-to-swiver) | Two-phase, audited ERP-to-invoicing migration over a REST API, with a reverse-engineered API guide | Python · REST |
 
 ### 🤖 AI & automation
 
 | | Project | What it is | Core stack |
 |:-:|---|---|---|
-| ✉️ | [**PFE Outreach Automation**](projects/ai-automation/pfe-outreach-automation) | Sourced-contact discovery and review-first Gmail drafting that can never auto-send | Node.js · Gmail API · TSV state machine |
+| 📥 | [**CV Intake Agent**](projects/ai-automation/cv-intake-agent) | Always-on agent: WhatsApp CVs → parse → LLM opportunity matching → validated, deduplicated sheet records, with retries, replay and a live dashboard | Node.js · whatsapp-web.js · OpenRouter LLM · Drive/Sheets APIs · SQLite · PM2 |
+| ✉️ | [**PFE Outreach Agent**](projects/ai-automation/pfe-outreach-automation) | Human-supervised agent: sourced-contact discovery and review-first Gmail drafting that can never auto-send | Node.js · Gmail API · TSV state machine |
 | 🛡️ | [**Trustini**](projects/ai-automation/trustini) | Concept for multimodal trust verification of online content | Product design · pitch |
 
 ### 🧪 Data engineering
@@ -70,7 +71,6 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | [**Stochastic Network Simulation**](projects/academic/stochastic-network-simulation) | Poisson and exponential traffic generators built from first principles | Python · NumPy · Matplotlib |
 | [**RMI Multiplayer Tic-Tac-Toe**](projects/academic/rmi-multiplayer-game) | Distributed game server with matchmaking, remote sessions and client callbacks | Java RMI |
 | [**Student Management API**](projects/academic/student-management-api) | Layered REST service with OpenAPI docs and service tests | Spring Boot · JPA · Swagger |
-
 ---
 
 ## 🧱 Stack
@@ -80,10 +80,10 @@ I'm open to a **PFE (end-of-studies) internship in AI, automation and data**.
 | **Languages** | JavaScript (ES2020+), TypeScript, Python, Java, SQL, HiveQL |
 | **Front end** | React 18/19, Next.js App Router, Vite, Tailwind CSS, D3.js |
 | **Back end & data stores** | Supabase (Postgres, Auth, Realtime, RLS), MySQL, SQL Server, Google Sheets as an operational store, Vercel serverless |
-| **Automation** | Google Apps Script (V8), `clasp`, time-driven triggers, `LockService`, webhooks |
+| **Automation** | Google Apps Script (V8), `clasp`, time-driven triggers, `LockService`, webhooks, n8n (earlier versions of several tools) |
 | **APIs** | GraphQL, REST, Gmail / Calendar / Drive / Sheets APIs, OAuth 2 |
 | **Data engineering** | Kafka, Spark Structured Streaming, HDFS, Hive, SSIS (star schemas) |
-| **AI** | LLM classification and summarisation (Groq), deterministic fallbacks, prompt and guardrail design |
+| **AI and agents** | LangChain and LangGraph (Python, internship work on multi-agent pipelines and routing agents), tool-using and multi-agent design, LLM extraction, matching and classification (Groq, OpenRouter), strict-schema outputs and golden-set evals, human-in-the-loop checkpoints, deterministic fallbacks, prompt and guardrail design |
 | **DevOps & quality** | Docker Compose, GitHub Actions, Vercel, Node test runners, idempotent migrations |
 
 ---
@@ -99,6 +99,7 @@ The same ideas show up across projects. Each case study links them to concrete d
 | **Own your writes** | Column-ownership contracts: the script writes only the columns it owns and never a cell a person might be editing. |
 | **Idempotent and re-runnable** | Schema enforcement, migrations and syncs that are safe to run twice, with dry-run and rehearsal modes. |
 | **Security lives in the data layer** | Row-Level Security, `SECURITY DEFINER` functions, HMAC-signed webhooks, narrow OAuth scopes, secrets only in properties or env. |
+| **Agents get narrow tools and a human at the gate** | Each agent has explicit scopes and one write path, validated and signed at the boundary. Drafts and digests prepare decisions; people make them. |
 | **Fail closed, degrade gracefully** | LLM calls never throw into a flow and always have a deterministic fallback. Outreach tooling is structurally unable to send mail. |
 | **Observable by default** | Run logs, correlation IDs, health strips and typed error codes instead of silent failures. |
 | **Test what can break money or trust** | Unit tests around date logic, finance parsing, digests and API handlers, run in CI. |
@@ -119,7 +120,7 @@ projects/
 ├── aiesec/                 production tooling for a student NGO
 ├── consulting/             executive operations dashboard
 ├── finance/                ERP migration
-├── ai-automation/          outreach automation and concepts
+├── ai-automation/          agents: CV intake, outreach, concepts
 ├── data-engineering/       streaming pipeline and data warehouse
 └── academic/               university projects
 ```

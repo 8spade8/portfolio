@@ -1,6 +1,8 @@
-# ✉️ PFE Outreach Automation
+# ✉️ PFE Outreach Agent
 
-> A review-first pipeline for **spontaneous internship applications**: discover small companies with a plausible project, find a *publicly sourced* contact, draft a targeted email, queue it for human approval and push it to **Gmail drafts**. It is designed so that it **cannot send mail**.
+> A **human-supervised, tool-using agent** for **spontaneous internship applications**: it discovers small companies with a plausible project, finds a *publicly sourced* contact, drafts a targeted email, queues it for human approval and pushes it to **Gmail drafts**. It is designed so that it **cannot send mail**.
+
+> **Why only the architecture is here.** The working system holds personal data, contact lists and application templates, so the source stays private. This page documents the agent design and its guardrails.
 
 ![Node](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 ![Gmail](https://img.shields.io/badge/Gmail_API-EA4335?style=flat-square&logo=gmail&logoColor=white)
@@ -49,6 +51,23 @@ stateDiagram-v2
     replied --> closed
     bounced --> closed
 ```
+
+## Agent design
+
+| Concept | In this system |
+|---|---|
+| **Goal** | Turn a sector and a quota into reviewed, sourced, personalised application drafts |
+| **Tools** | Public registry and web lookup, contact extraction from a company's own domain, template and CV selection, Gmail `drafts.create` |
+| **State and memory** | An append-only candidates file and a TSV outbox that acts as an explicit state machine; every row stores the evidence (source URL, language rule, cited project signal) |
+| **Planning** | Config-driven: sectors, seeds and daily quotas decide what the agent works on next |
+| **Autonomy level** | Acts alone up to *draft*; a human is the only path to *approved* and *sent* |
+| **Safety layer** | Structural guardrails (below), enforced in code and by tests rather than by prompt wording |
+
+Each of the five units is a single-purpose agent step with a file-based interface, so it can be run, tested and replaced on its own. That is what makes the pipeline auditable.
+
+## Technology lineage
+
+Built as an extension of an open-source AI job-search framework (career-ops): I added a new application channel with a design spec, five modules, Gmail integration, board integration and tests, without breaking the host project.
 
 ## Guardrails (the interesting part)
 
