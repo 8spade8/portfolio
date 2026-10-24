@@ -65,6 +65,32 @@ stateDiagram-v2
 
 Each of the five units is a single-purpose agent step with a file-based interface, so it can be run, tested and replaced on its own. That is what makes the pipeline auditable.
 
+## LangGraph view of this agent
+
+The runtime is Node.js with a TSV outbox, but the control flow is a graph, and this is how it maps onto **LangGraph** concepts. It is a design reference, not the code that runs.
+
+| LangGraph concept | In this agent |
+|---|---|
+| **State** | One outbox row per company: domain, evidence URL, contact and confidence, language rule, draft, status |
+| **Nodes** | `discover` → `find_contact` → `draft` → `queue_outbox` → `approve` → `push_gmail_draft` |
+| **Conditional edges** | No sourced contact → end as "no contact". Duplicate domain → end. Daily cap reached → pause. Negative reply → close the domain permanently |
+| **Human-in-the-loop** | `approve` is an interrupt before the only action with side effects. A person approves, then a person presses Send in Gmail |
+| **Checkpointing** | The TSV outbox is the persisted state, so the run resumes from any row |
+| **Tools** | Registry and web lookup, contact extraction, template selection and Gmail `drafts.create` only |
+
+```mermaid
+stateDiagram-v2
+    [*] --> discover
+    discover --> find_contact
+    find_contact --> no_contact : no sourced address
+    find_contact --> draft
+    draft --> queue_outbox
+    queue_outbox --> approve : interrupt, human review
+    approve --> push_gmail_draft : approved
+    push_gmail_draft --> [*] : human presses Send
+    no_contact --> [*]
+```
+
 ## Technology lineage
 
 Built as an extension of an open-source AI job-search framework (career-ops): I added a new application channel with a design spec, five modules, Gmail integration, board integration and tests, without breaking the host project.

@@ -56,6 +56,37 @@ flowchart LR
     SH --> TEAM(("Team: own,<br/>filter, follow up"))
 ```
 
+## LangGraph view of this agent
+
+The production runtime is Node.js, but the control flow is a graph, and this is how it maps onto **LangGraph** concepts. It is a design reference, not the code that runs.
+
+| LangGraph concept | In this agent |
+|---|---|
+| **State** | One job object per CV: message ID, Drive file ID, raw parse, normalised record, match result, confidence, status, retry count |
+| **Nodes** | `filter_dedup` → `store_drive` → `parse` → `normalise` → `llm_match` → `validate` → `write_sheet`, plus `flag_review` and `record_failure` |
+| **Conditional edges** | Duplicate message → end. Parse error and retries left → back to `parse` with backoff. Retries exhausted → `record_failure`. Low confidence or invalid → `flag_review`. Otherwise → `write_sheet` |
+| **Human-in-the-loop** | `flag_review` is an interrupt: a person resolves it in the sheet before the record counts as matched |
+| **Checkpointing** | SQLite dedup state, the job queue and per-CV artifacts let a crashed run resume or be replayed |
+| **Tools** | Drive client, CV parser, LLM matcher and the sheet writer, each behind a typed, validated interface |
+
+```mermaid
+stateDiagram-v2
+    [*] --> filter_dedup
+    filter_dedup --> [*] : duplicate
+    filter_dedup --> store_drive
+    store_drive --> parse
+    parse --> parse : error, retries left
+    parse --> record_failure : retries exhausted
+    parse --> normalise
+    normalise --> llm_match
+    llm_match --> validate
+    validate --> flag_review : low confidence or invalid
+    validate --> write_sheet
+    flag_review --> write_sheet : human resolves
+    write_sheet --> [*]
+    record_failure --> [*]
+```
+
 ## Write path: from workflow tool to a single writer
 
 The sheet write path was redesigned in three modes behind one setting, which let the change be proven before it went live:

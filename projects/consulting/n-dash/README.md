@@ -57,6 +57,20 @@ flowchart LR
     OUT --> HUMAN(("Executive<br/>decides"))
 ```
 
+### LangGraph view of this system
+
+The runtime is Apps Script, but the control flow is a **supervisor with parallel workers**, and this is how it maps onto **LangGraph** concepts. It is a design reference, not the code that runs.
+
+| LangGraph concept | In N-Dash |
+|---|---|
+| **State** | The canonical store: classified emails, events, projects, to-dos, links and KPI snapshots |
+| **Supervisor node** | The trigger manager that schedules each flow |
+| **Parallel branches** | Email triage, unanswered scanner, calendar prep, project and to-do linker, KPI snapshot |
+| **Join node** | The digest composer, which reads the whole store |
+| **Conditional edges** | LLM call fails → deterministic rule-based fallback. Link confidence below threshold → leave unlinked. Nothing needs attention → short digest |
+| **Human-in-the-loop** | The output is a decision brief; the executive acts, the system never does |
+| **Tools** | Gmail and Calendar (read-only), Drive, the finance workbook and the LLM wrapper that fails closed |
+
 **Human-in-the-loop by construction.** The agents never act on the world on the executive's behalf. They prepare decisions and the human makes them.
 
 ## Technology lineage
